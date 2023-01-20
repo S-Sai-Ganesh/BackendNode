@@ -6,6 +6,8 @@ const admin = require('./routes/admin.js');
 const shop = require('./routes/shop.js');
 const contactus = require('./routes/contactus.js');
 
+const controller404 = require('./controllers/404');
+
 const app = express();
 
 app.use(bodyParser.urlencoded({extended: false}))
@@ -17,8 +19,6 @@ app.use('/shop',shop)
 
 app.use('/contactus',contactus)
 
-app.use('/',(req,res,next)=>{
-    res.status(404).sendFile(path.join(__dirname,'views','404.html'))
-})
+app.use('/',controller404.get404)
 
 app.listen('3000');
