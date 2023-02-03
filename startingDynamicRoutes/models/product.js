@@ -32,7 +32,7 @@ module.exports = class Product {
         const existingProductIndex = products.findIndex(prod => prod.id === this.id)
         const updatedProducts = [...products]
         updatedProducts[existingProductIndex] = this;
-        fs.writeFile(p, JSON.stringify(updatedproducts), err => {
+        fs.writeFile(p, JSON.stringify(updatedProducts), err => {
           console.log(err);
         });
       } else {
@@ -43,6 +43,17 @@ module.exports = class Product {
         });
       }
     });
+  }
+
+  static deleteById(prodId) {
+    getProductsFromFile(products => {
+      const existingProductIndex = products.findIndex(prod => prod.id === prodId)
+      const updatedProducts = [...products]
+      updatedProducts.splice(existingProductIndex,1)
+      fs.writeFile(p, JSON.stringify(updatedProducts), err => {
+        console.log(err);
+      });
+    })
   }
 
   static fetchAll(cb) {
