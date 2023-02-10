@@ -7,13 +7,15 @@ const errorController = require("./controllers/error");
 const sequelize = require("./util/database");
 
 const cors = require('cors');
-const usersRoutes = require('./routes/user')
+const usersRoutes = require('./routes/user');
+const expenseRoutes = require('./routes/expense');
 
 const app = express();
 
 app.use(bodyParser.json());
 app.use(cors());
 app.use(usersRoutes);
+app.use('/expense',expenseRoutes);
 
 app.set("view engine", "ejs");
 app.set("views", "views");
